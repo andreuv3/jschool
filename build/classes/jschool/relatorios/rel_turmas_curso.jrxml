@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rel_turmas_curso" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2d7d4f48-864d-4a23-8450-72b59a0c50e7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_curso" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nome_curso" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT p.nome, CAST(t.data_inicio AS DATE), t.data_fim, t.vagas, t.media_aprovacao, t.sala, horario_inicio_aula, horario_fim_aula,
+       CASE WHEN tipo_media = 1 THEN 'Aritimética' WHEN tipo_media = 2 THEN 'Ponderada' ELSE 'Harmônica' END AS tipo_media
+FROM turma t
+INNER JOIN curso c
+ON t.id_curso = c.id
+INNER JOIN pessoa p
+ON t.id_professor = p.id
+WHERE c.id = $P{id_curso}]]>
+	</queryString>
+	<field name="nome" class="java.lang.String"/>
+	<field name="data_inicio" class="java.sql.Date"/>
+	<field name="data_fim" class="java.sql.Date"/>
+	<field name="vagas" class="java.lang.Integer"/>
+	<field name="media_aprovacao" class="java.math.BigDecimal"/>
+	<field name="sala" class="java.lang.String"/>
+	<field name="horario_inicio_aula" class="java.sql.Time"/>
+	<field name="horario_fim_aula" class="java.sql.Time"/>
+	<field name="tipo_media" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="37" y="4" width="494" height="42" uuid="1a04b3e2-2526-46cb-a2ed-4a26c85a1e0b"/>
+				<textElement>
+					<font size="32"/>
+				</textElement>
+				<text><![CDATA[Listagem de turmas por curso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="135" y="52" width="62" height="20" uuid="a5a1095c-d0d5-4b51-99f1-991790067c7f"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Gerado em]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="327" y="52" width="18" height="20" uuid="acc42cc1-cfe3-4158-81af-b25d21eb10c3"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[às]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="197" y="52" width="130" height="20" uuid="07056018-ef18-4c00-b790-1515f7bb9ade"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm.ss">
+				<reportElement x="345" y="52" width="100" height="20" uuid="578a6cbd-5333-44e0-b019-b465f0a65e5d"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="248" y="9" width="307" height="20" uuid="2a098a56-c92b-4e6d-921e-281e8144bdcd"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nome_curso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="9" width="248" height="20" uuid="198c5909-78fc-4f2e-9bff-2264ee2f3a30"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de turmas do curso:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="96" height="20" uuid="e6d3a702-c3f3-4efa-8b19-483d2c50fb1a"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data inicial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="96" y="0" width="101" height="20" uuid="dd32d651-f70c-41f5-9797-86e62c9817e6"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data final]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="411" y="0" width="69" height="20" uuid="40307793-e831-4cce-9f68-6ee77361e408"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vagas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="0" width="96" height="20" uuid="c1279bf9-8604-4555-9895-160a21c5e102"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Média aprovação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="0" width="75" height="20" uuid="dd53481d-318e-45f8-b89c-1c6720cc2150"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[sala]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="197" y="0" width="118" height="20" uuid="d6196a4e-6ec9-4b7c-8b37-018cf88e51b7"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de média]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="0" width="96" height="20" uuid="21de5861-2d87-435f-b072-6c9cfe74e51f"/>
+				<textFieldExpression><![CDATA[$F{data_inicio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="96" y="0" width="101" height="20" uuid="bd40c5b1-bc1e-4050-ba4b-ea6fed476da7"/>
+				<textFieldExpression><![CDATA[$F{data_fim}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="411" y="0" width="69" height="20" uuid="2d477da1-b8b5-4565-84e4-c8f36190ba2b"/>
+				<textFieldExpression><![CDATA[$F{vagas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="315" y="0" width="96" height="20" uuid="302b26b9-c88f-4536-8141-d2976121fb5a"/>
+				<textFieldExpression><![CDATA[$F{media_aprovacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="76" height="20" uuid="ffa70478-6a30-4f4b-b923-d25419177a36"/>
+				<textFieldExpression><![CDATA[$F{sala}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="197" y="0" width="118" height="20" uuid="5fef1ac5-7749-4634-960f-c715c7d9424e"/>
+				<textFieldExpression><![CDATA[$F{tipo_media}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="44" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="327" y="24" width="180" height="20" uuid="7e7d2e9c-83b2-4da0-9bae-28056741ffef"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="507" y="24" width="40" height="20" uuid="b426e537-85ac-42ba-a336-f9670c871d13"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rel_cursos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="10098e5d-2b4f-4a2b-b784-3b69ae4c5f3c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT 	nome, horas_duracao, vagas_recomendadas,
+	CASE WHEN status = 1 THEN 'Ativo' ELSE 'Inativo' END AS situacao
+FROM curso
+ORDER BY nome]]>
+	</queryString>
+	<field name="nome" class="java.lang.String"/>
+	<field name="horas_duracao" class="java.math.BigDecimal"/>
+	<field name="vagas_recomendadas" class="java.lang.Integer"/>
+	<field name="situacao" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="91" y="8" width="407" height="43" uuid="44138429-f1fb-4565-8e74-869b55e54e76"/>
+				<textElement>
+					<font size="36" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Listagem de cursos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="156" y="55" width="59" height="20" uuid="1202ff7c-7f75-4f23-917a-ff36de5caeab"/>
+				<text><![CDATA[Gerado em]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="215" y="55" width="100" height="20" uuid="d6c2a6d2-cd63-4d3b-884f-2a35b857535c"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="315" y="55" width="13" height="20" uuid="4afefed2-bf48-4c7a-a75d-937211a72f70"/>
+				<text><![CDATA[às]]></text>
+			</staticText>
+			<textField pattern="HH.mm.ss">
+				<reportElement x="328" y="55" width="100" height="20" uuid="4b9df4b1-328b-4fc5-8a1e-818325be05c5"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="255" height="20" uuid="df919e32-8c31-447a-9e69-7ac7d065b5d8"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Curso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="255" y="2" width="100" height="20" uuid="5ef11789-2e38-4b15-b358-4de4869710af"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Duração (h)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="2" width="100" height="20" uuid="7bca6370-47a0-4103-a38f-b61dfd6018cf"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vagas Rec.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="2" width="100" height="20" uuid="58030936-5c74-4f0b-81cb-35242fd08c38"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Situação]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="3" width="255" height="20" uuid="1049a65e-6779-48e8-ac6e-e4704b46280b"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="255" y="3" width="100" height="20" uuid="99bda528-ad85-41c8-9e9a-32ce743e4e2a"/>
+				<textFieldExpression><![CDATA[$F{horas_duracao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="355" y="3" width="100" height="20" uuid="1204e7a5-3e01-49f7-866e-f91ce377c05b"/>
+				<textFieldExpression><![CDATA[$F{vagas_recomendadas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="3" width="100" height="20" uuid="a93fc411-ad24-42c9-ad45-4260e2752db5"/>
+				<textFieldExpression><![CDATA[$F{situacao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="403" y="12" width="36" height="20" uuid="e604d7ab-1490-4dcf-87b4-78e134715f2d"/>
+				<text><![CDATA[Página]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="439" y="12" width="16" height="20" uuid="b1da692e-1d48-4fda-ae3f-9cf220ccbe0d"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="455" y="12" width="21" height="20" uuid="c3b7d181-cde6-454a-8063-80c2c146e5ef"/>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="476" y="12" width="22" height="20" uuid="0118d5bd-024f-4ce3-bdb1-c78e5c39e9f2"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
